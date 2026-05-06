@@ -44,13 +44,13 @@ export default function Signup() {
     }
   }
 
-  const handleVerifyEmailOTP = (e) => {
+  const handleVerifyEmailOTP = async (e) => {
     e.preventDefault();
     if(!isNotEmpty(otp)) {
       setError('Please enter OTP')
       return;
     }
-    const result = signUp(email, otp);
+    const result = await signUp(email, otp);
     if(result.success) {
       navigate('/view')
     } else {

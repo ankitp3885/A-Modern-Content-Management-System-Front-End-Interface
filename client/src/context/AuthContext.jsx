@@ -84,10 +84,13 @@ export default function AuthProvider({children}) {
 			const data = await response.json();
 
 			if (response.ok) {
-				const userData = { email, userId: data.userId };
+				const userData = {
+					email: data.user?.email || email,
+					userId: data.user?.userId,
+				};
 				setUser(userData);
 				localStorage.setItem('user', JSON.stringify(userData));
-				return { success: true, userId: data.userId };
+				return { success: true, userId: userData.userId };
 			} else {
 				return { success: false, message: data.message };
 			}
